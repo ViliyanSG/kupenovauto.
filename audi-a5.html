@@ -367,15 +367,15 @@
       clearInterval(autoTimer);
       autoTimer = setInterval(() => {
         if (isVisible) goTo((current + 1) % slides.length);
-      }, 2500);
+      }, 10000);
     }
 
-    // Only auto-advance when carousel is visible
-    let isVisible = false;
-    const observer = new IntersectionObserver(entries => {
-      isVisible = entries[0].isIntersecting;
-    }, { threshold: 0.5 });
-    observer.observe(wrap);
+    // Stop auto when user scrolls past carousel
+    let isVisible = true;
+    window.addEventListener('scroll', () => {
+      const rect = wrap.getBoundingClientRect();
+      isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    }, { passive: true });
 
     resetAuto();
 
