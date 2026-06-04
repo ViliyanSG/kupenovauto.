@@ -93,6 +93,7 @@
 
     /* ── CAROUSEL ── */
     .carousel-section { padding: 70px 0 0; overflow: hidden; }
+    .carousel-slide { cursor: zoom-in; }
     .carousel-track-wrap {
       position: relative;
       width: 100%;
@@ -182,6 +183,63 @@
       .specs-full-grid { grid-template-columns: 1fr; }
       .specs-full-section { padding: 60px 24px 80px; }
     }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px; right: 28px;
+      font-size: 36px;
+      color: var(--white);
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      line-height: 1;
+      z-index: 10;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 48px;
+      color: var(--white);
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      padding: 20px;
+      user-select: none;
+      z-index: 10;
+    }
+    .lightbox-arrow:hover { opacity: 1; }
+    .lightbox-arrow.prev { left: 10px; }
+    .lightbox-arrow.next { right: 10px; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--grey);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+    }
   </style>
 </head>
 <body>
@@ -230,19 +288,19 @@
   <section class="carousel-section">
     <div class="carousel-track-wrap" id="carouselWrap">
       <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03493.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03494.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03496.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03498.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03500.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03502.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03504.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03507.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03510.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03511.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03517.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03519.jpg" alt="Audi A5"></div>
-        <div class="carousel-slide"><img src="images/audi_a5/DSC03528.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(0)"><img src="images/audi_a5/DSC03493.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(1)"><img src="images/audi_a5/DSC03494.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(2)"><img src="images/audi_a5/DSC03496.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(3)"><img src="images/audi_a5/DSC03498.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(4)"><img src="images/audi_a5/DSC03500.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(5)"><img src="images/audi_a5/DSC03502.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(6)"><img src="images/audi_a5/DSC03504.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(7)"><img src="images/audi_a5/DSC03507.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(8)"><img src="images/audi_a5/DSC03510.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(9)"><img src="images/audi_a5/DSC03511.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(10)"><img src="images/audi_a5/DSC03517.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(11)"><img src="images/audi_a5/DSC03519.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide" onclick="openLightbox(12)"><img src="images/audi_a5/DSC03528.jpg" alt="Audi A5"></div>
       </div>
     </div>
     <div class="carousel-thumbs" id="carouselThumbs"></div>
@@ -312,6 +370,16 @@
       </div>
     </div>
   </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <span class="lightbox-arrow prev" onclick="lightboxPrev(event)">&#8592;</span>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <span class="lightbox-arrow next" onclick="lightboxNext(event)">&#8594;</span>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
 
   <!-- FOOTER -->
   <footer>
@@ -410,6 +478,52 @@
     }
   </script>
   <script>
+
+    // ── Lightbox ──
+    const lbImgs = [
+      'DSC03493','DSC03494','DSC03496','DSC03498','DSC03500',
+      'DSC03502','DSC03504','DSC03507','DSC03510','DSC03511',
+      'DSC03517','DSC03519','DSC03528'
+    ];
+    let lbIndex = 0;
+
+    function openLightbox(i) {
+      lbIndex = i;
+      isVisible = false; // pause carousel
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+      isVisible = true;
+    }
+    function closeLightboxOutside(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+    function lightboxPrev(e) {
+      e.stopPropagation();
+      lbIndex = (lbIndex - 1 + lbImgs.length) % lbImgs.length;
+      updateLightbox();
+    }
+    function lightboxNext(e) {
+      e.stopPropagation();
+      lbIndex = (lbIndex + 1) % lbImgs.length;
+      updateLightbox();
+    }
+    function updateLightbox() {
+      document.getElementById('lightboxImg').src = 'images/audi_a5/' + lbImgs[lbIndex] + '.jpg';
+      document.getElementById('lightboxCounter').textContent = (lbIndex + 1) + ' / ' + lbImgs.length;
+    }
+    // Keyboard arrows
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') lightboxPrev(e);
+      if (e.key === 'ArrowRight') lightboxNext(e);
+      if (e.key === 'Escape') closeLightbox();
+    });
+
     function copyMail(el) {
       navigator.clipboard.writeText('lachezar.kupenov@gmail.com').then(() => {
         const span = el.querySelector('span:last-child');
