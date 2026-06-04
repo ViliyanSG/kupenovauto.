@@ -192,7 +192,7 @@
       <a href="index.html"><img src="images/logo.png" alt="Kupenov Auto"></a>
     </div>
     <div class="nav-contact">
-      <a href="mailto:lachezar.kupenov@gmail.com" target="_blank">lachezar.kupenov@gmail.com</a>
+      <span class="nav-email" onclick="copyEmail(this)" title="Копирай имейл" style="cursor:pointer; font-size:13px; letter-spacing:0.05em; opacity:0.8; color:var(--white);">lachezar.kupenov@gmail.com</span>
       <a href="tel:+359889017810" class="phone-link" id="navPhone">+359 88 901 7810</a>
     </div>
   </nav>
@@ -219,7 +219,7 @@
         </div>
         <div class="contact-row">
           <span class="icon">✉️</span>
-          <a href="mailto:lachezar.kupenov@gmail.com" target="_blank">lachezar.kupenov@gmail.com</a>
+          <span class="nav-email" onclick="copyEmail(this)" title="Копирай имейл" style="cursor:pointer; font-size:13px; letter-spacing:0.05em; opacity:0.8; color:var(--white);">lachezar.kupenov@gmail.com</span>
         </div>
       </div>
     </div>
@@ -365,8 +365,17 @@
 
     function resetAuto() {
       clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo((current + 1) % slides.length), 2500);
+      autoTimer = setInterval(() => {
+        if (isVisible) goTo((current + 1) % slides.length);
+      }, 2500);
     }
+
+    // Only auto-advance when carousel is visible
+    let isVisible = false;
+    const observer = new IntersectionObserver(entries => {
+      isVisible = entries[0].isIntersecting;
+    }, { threshold: 0.5 });
+    observer.observe(wrap);
 
     resetAuto();
 
@@ -388,6 +397,14 @@
       const diff = e.changedTouches[0].clientX - startX;
       if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
     });
+
+    function copyEmail(el) {
+      navigator.clipboard.writeText('lachezar.kupenov@gmail.com').then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Копирано!';
+        setTimeout(() => el.textContent = orig, 1500);
+      });
+    }
   </script>
 </body>
 </html>
