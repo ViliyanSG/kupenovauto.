@@ -1,0 +1,324 @@
+:root {
+  --black: #0a0a0a;
+  --dark: #111111;
+  --card: #161616;
+  --border: #2a2a2a;
+  --gold: #c9a84c;
+  --gold-light: #e2c97e;
+  --white: #f5f0e8;
+  --grey: #888;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  transition: background 0.3s;
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.97);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo img { height: 48px; object-fit: contain; }
+.nav-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.nav-contact a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  transition: opacity 0.2s, color 0.2s;
+}
+.nav-contact a:hover { opacity: 1; color: var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+.hero-line {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  margin: 0 auto 40px;
+  animation: fadeDown 1.2s ease forwards;
+}
+.hero img.hero-logo {
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 28px;
+  animation: fadeUp 1s ease 0.2s both;
+  filter: brightness(0) invert(1);
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 7vw, 82px);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  animation: fadeUp 1s ease 0.4s both;
+}
+.hero h1 span { color: var(--gold); }
+.hero p {
+  margin-top: 16px;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--grey);
+  animation: fadeUp 1s ease 0.6s both;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--grey);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  animation: fadeUp 1s ease 1s both;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--grey), transparent);
+  animation: scrollLine 1.5s ease-in-out infinite;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 60px;
+  margin: 70px 0 50px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.divider span {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+}
+
+/* ── CARS ── */
+.cars-section { padding: 0 60px 100px; }
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2px;
+}
+
+/* ── CAR CARD ── */
+.car-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.car-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+.car-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+}
+.car-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  display: block;
+}
+.car-card:hover .car-img-wrap img { transform: scale(1.04); }
+.car-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+}
+.car-badge {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  z-index: 2;
+}
+.car-info { padding: 24px 28px 28px; }
+.car-info h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+.car-price {
+  font-size: 22px;
+  color: var(--gold);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+
+/* ── SPECS TABLE ── */
+.table-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  width: 100%;
+}
+.table-toggle:hover { border-color: var(--gold); color: var(--gold); }
+.table-toggle.open {
+  background: rgba(201,168,76,0.08);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.specs-wrapper { display: none; margin-top: 20px; }
+.specs-wrapper.open { display: block; }
+.specs-section { margin-bottom: 16px; }
+.specs-section-title {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.specs-table { width: 100%; border-collapse: collapse; }
+.specs-table tr { border-bottom: 1px solid rgba(42,42,42,0.6); }
+.specs-table tr:last-child { border-bottom: none; }
+.specs-table td { padding: 7px 4px; font-size: 13px; color: var(--grey); }
+.specs-table td:first-child { color: var(--white); opacity: 0.85; width: 55%; }
+.specs-table td:last-child { text-align: right; color: var(--white); }
+
+/* ── CONTACT ── */
+.contact-section {
+  border-top: 1px solid var(--border);
+  padding: 80px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.contact-left h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.contact-left h2 span { color: var(--gold); }
+.contact-left p { color: var(--grey); font-size: 14px; line-height: 1.7; max-width: 380px; }
+.contact-right { display: flex; flex-direction: column; gap: 20px; }
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s;
+}
+.contact-item:hover { border-color: var(--gold); }
+.contact-icon { font-size: 20px; min-width: 24px; text-align: center; }
+.contact-item a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.contact-item a:hover { color: var(--gold); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+footer img { height: 32px; filter: brightness(0) invert(1); opacity: 0.5; }
+footer p { font-size: 12px; color: var(--grey); letter-spacing: 0.08em; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; height: 0; }
+  to   { opacity: 1; height: 80px; }
+}
+@keyframes scrollLine {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .divider { padding: 0 24px; }
+  .cars-section { padding: 0 16px 80px; }
+  .cars-grid { grid-template-columns: 1fr; }
+  .contact-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+}
