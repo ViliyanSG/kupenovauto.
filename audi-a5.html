@@ -8,6 +8,186 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── HERO SECTION ── */
+    .car-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 100vh;
+      padding-top: 88px;
+    }
+    .car-hero-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .car-hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .car-hero-info {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 70px;
+      border-left: 1px solid var(--border);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+    .car-hero-info h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .car-hero-info h1 span { color: var(--gold); }
+    .car-hero-price {
+      font-size: 32px;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 48px;
+    }
+    .hero-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .hero-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-table tr:last-child { border-bottom: none; }
+    .hero-table td {
+      padding: 14px 0;
+      font-size: 14px;
+    }
+    .hero-table td:first-child {
+      color: var(--grey);
+      letter-spacing: 0.05em;
+      width: 50%;
+    }
+    .hero-table td:last-child {
+      color: var(--white);
+      font-weight: 400;
+      text-align: right;
+      letter-spacing: 0.03em;
+    }
+    .hero-table .td-gold {
+      color: var(--gold) !important;
+      font-weight: 500;
+    }
+
+    /* ── CAROUSEL ── */
+    .carousel-section {
+      padding: 80px 0 0;
+      overflow: hidden;
+    }
+    .carousel-track-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .carousel-slide {
+      min-width: 100%;
+      aspect-ratio: 16/7;
+      overflow: hidden;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 20px 0 0;
+    }
+    .carousel-dot {
+      width: 24px;
+      height: 2px;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.3s, width 0.3s;
+    }
+    .carousel-dot.active {
+      background: var(--gold);
+      width: 40px;
+    }
+
+    /* ── SPECS SECTION ── */
+    .specs-full-section {
+      padding: 80px 60px 100px;
+    }
+    .specs-full-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .specs-full-block {}
+    .specs-full-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .specs-full-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .specs-full-table tr {
+      border-bottom: 1px solid rgba(42,42,42,0.5);
+    }
+    .specs-full-table tr:last-child { border-bottom: none; }
+    .specs-full-table td {
+      padding: 10px 4px;
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+    .specs-full-table td:first-child {
+      color: var(--grey);
+      width: 55%;
+    }
+    .specs-full-table td:last-child {
+      color: var(--white);
+      text-align: right;
+    }
+    .specs-full-table .val-yes { color: #56d364; }
+    .specs-full-table .val-no  { color: #f85149; opacity: 0.7; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .car-hero { grid-template-columns: 1fr; min-height: auto; }
+      .car-hero-img { aspect-ratio: 16/9; height: auto; }
+      .car-hero-info { padding: 40px 24px; }
+      .car-hero-info h1 { font-size: 38px; }
+      .specs-full-grid { grid-template-columns: 1fr; }
+      .specs-full-section { padding: 60px 24px 80px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -22,15 +202,117 @@
     </div>
   </nav>
 
-  <!-- PLACEHOLDER -->
-  <div style="height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px;">
-    <p style="font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--gold);">Audi A5</p>
-    <p style="color: var(--grey); letter-spacing: 0.2em; font-size: 13px; text-transform: uppercase;">Страницата се подготвя</p>
-    <a href="index.html" style="margin-top: 24px; color: var(--white); text-decoration: none; border: 1px solid var(--border); padding: 10px 24px; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; transition: border-color 0.2s;"
-       onmouseover="this.style.borderColor='#c9a84c'" onmouseout="this.style.borderColor='#2a2a2a'">
-      ← Назад
-    </a>
-  </div>
+  <!-- HERO: снимка + таблица -->
+  <section class="car-hero">
+    <div class="car-hero-img">
+      <img src="images/audi_a5/DSC03483.jpg" alt="Audi A5">
+    </div>
+    <div class="car-hero-info">
+      <a href="index.html" class="back-link">← Назад към всички автомобили</a>
+      <h1>AUDI <span>A5</span></h1>
+      <div class="car-hero-price">26 000 EUR</div>
+      <table class="hero-table">
+        <tr><td>Модел</td><td class="td-gold">Ауди А5 Sportback</td></tr>
+        <tr><td>Година на производство</td><td>Януари 2018</td></tr>
+        <tr><td>Конски сили</td><td>286 к.с.</td></tr>
+        <tr><td>Гориво</td><td>Дизел</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- CAROUSEL -->
+  <section class="carousel-section">
+    <div class="carousel-track-wrap">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03493.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03494.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03496.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03498.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03500.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03502.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03504.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03507.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03510.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03511.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03517.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03519.jpg" alt="Audi A5"></div>
+        <div class="carousel-slide"><img src="images/audi_a5/DSC03528.jpg" alt="Audi A5"></div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider"><span>Технически характеристики</span></div>
+
+  <!-- FULL SPECS -->
+  <section class="specs-full-section">
+    <div class="specs-full-grid">
+
+      <!-- ОБЩИ -->
+      <div class="specs-full-block">
+        <div class="specs-full-title">Общи характеристики</div>
+        <table class="specs-full-table">
+          <tr><td>Година на производство</td><td>Януари 2018</td></tr>
+          <tr><td>Фейслифт</td><td class="val-no">Не</td></tr>
+          <tr><td>Километри</td><td>213 643</td></tr>
+          <tr><td>Гориво</td><td>Дизел</td></tr>
+          <tr><td>Кубатура на двигател</td><td>2967 см³</td></tr>
+          <tr><td>Код на двигател</td><td>DCPC</td></tr>
+          <tr><td>Скоростна кутия</td><td>8ст. автоматична</td></tr>
+          <tr><td>Задвижване</td><td>4×4</td></tr>
+          <tr><td>Размер на гуми</td><td>255/35/19</td></tr>
+          <tr><td>Конски сили</td><td>286</td></tr>
+          <tr><td>Нютон метри</td><td>620</td></tr>
+          <tr><td>Турбо</td><td class="val-yes">Да</td></tr>
+          <tr><td>Произход</td><td>България</td></tr>
+          <tr><td>Ускорение 0–100 км/ч</td><td>5.3 сек.</td></tr>
+          <tr><td>Цвят</td><td>Бронз</td></tr>
+        </table>
+      </div>
+
+      <!-- ЕКСТРИ -->
+      <div class="specs-full-block">
+        <div class="specs-full-title">Екстри</div>
+        <table class="specs-full-table">
+          <tr><td>Безключов достъп</td><td class="val-yes">Да</td></tr>
+          <tr><td>Подгрев седалки</td><td class="val-yes">Да</td></tr>
+          <tr><td>Подгрев волан</td><td class="val-no">Не</td></tr>
+          <tr><td>Вентилация на седалки</td><td class="val-no">Не</td></tr>
+          <tr><td>Подгрев челно стъкло</td><td class="val-no">Не</td></tr>
+          <tr><td>Панорама</td><td class="val-no">Не</td></tr>
+          <tr><td>360° камера</td><td class="val-no">Не</td></tr>
+          <tr><td>Парктроник</td><td>Преден и заден</td></tr>
+          <tr><td>Паркинг асистент</td><td class="val-yes">Да</td></tr>
+          <tr><td>Адаптивен автопилот</td><td class="val-yes">Да</td></tr>
+          <tr><td>Вид салон</td><td>Кожен</td></tr>
+          <tr><td>Електрически багажник</td><td class="val-yes">Да</td></tr>
+          <tr><td>Затъмнени стъкла</td><td class="val-no">Не</td></tr>
+          <tr><td>Прибиране на огледала</td><td class="val-yes">Да</td></tr>
+          <tr><td>Електрически седалки</td><td class="val-yes">Да</td></tr>
+          <tr><td>Carplay / Android Auto</td><td>Да, жичен</td></tr>
+          <tr><td>Heads Up Display</td><td class="val-no">Не</td></tr>
+          <tr><td>Озвучителна система</td><td>Bang & Olufsen</td></tr>
+          <tr><td>Задна камера</td><td class="val-yes">Да</td></tr>
+          <tr><td>Фарове</td><td>LED Matrix</td></tr>
+          <tr><td>Спорт пакет</td><td class="val-no">Не</td></tr>
+        </table>
+      </div>
+
+      <!-- АДМИНИСТРАТИВНИ -->
+      <div class="specs-full-block">
+        <div class="specs-full-title">Административни</div>
+        <table class="specs-full-table">
+          <tr><td>Годишен технически преглед</td><td>До 11.2026</td></tr>
+          <tr><td>Застраховка ГО</td><td>До 11.2026</td></tr>
+          <tr><td>Каско</td><td>До 11.2026</td></tr>
+          <tr><td>Винетка</td><td>До 11.2026</td></tr>
+          <tr><td>Годишен данък</td><td class="val-yes">Платен 2026</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -39,5 +321,34 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Carousel
+    const track = document.getElementById('carouselTrack');
+    const dotsContainer = document.getElementById('carouselDots');
+    const slides = track.querySelectorAll('.carousel-slide');
+    let current = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.onclick = () => goTo(i);
+      dotsContainer.appendChild(dot);
+    });
+
+    function goTo(index) {
+      current = index;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    // Auto-advance every 2.5 seconds
+    setInterval(() => {
+      goTo((current + 1) % slides.length);
+    }, 2500);
+  </script>
+
 </body>
 </html>
