@@ -9,24 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ── HERO SECTION ── */
+    /* ── HERO ── */
     .car-hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0;
       min-height: 100vh;
       padding-top: 88px;
     }
-    .car-hero-img {
-      position: relative;
-      overflow: hidden;
-    }
-    .car-hero-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .car-hero-img { position: relative; overflow: hidden; }
+    .car-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .car-hero-info {
       background: var(--dark);
       display: flex;
@@ -50,7 +41,7 @@
     .back-link:hover { color: var(--gold); }
     .car-hero-info h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 52px;
+      font-size: 58px;
       font-weight: 600;
       letter-spacing: 0.08em;
       line-height: 1;
@@ -58,53 +49,61 @@
     }
     .car-hero-info h1 span { color: var(--gold); }
     .car-hero-price {
-      font-size: 32px;
+      font-size: 36px;
       color: var(--gold);
       font-weight: 500;
       letter-spacing: 0.05em;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
-    .hero-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .hero-table tr {
-      border-bottom: 1px solid var(--border);
-    }
+
+    /* Hero table */
+    .hero-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+    .hero-table tr { border-bottom: 1px solid var(--border); }
     .hero-table tr:last-child { border-bottom: none; }
-    .hero-table td {
-      padding: 14px 0;
-      font-size: 14px;
+    .hero-table td { padding: 16px 0; font-size: 16px; }
+    .hero-table td:first-child { color: var(--grey); width: 50%; }
+    .hero-table td:last-child { color: var(--white); text-align: right; font-weight: 400; }
+    .hero-table .td-gold { color: var(--gold) !important; font-weight: 500; }
+
+    /* Contact block */
+    .hero-contacts { display: flex; flex-direction: column; gap: 12px; }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
     }
-    .hero-table td:first-child {
-      color: var(--grey);
-      letter-spacing: 0.05em;
-      width: 50%;
-    }
-    .hero-table td:last-child {
+    .contact-row:hover { border-color: var(--gold); }
+    .contact-row .icon { font-size: 18px; min-width: 22px; text-align: center; }
+    .contact-row a {
       color: var(--white);
-      font-weight: 400;
-      text-align: right;
-      letter-spacing: 0.03em;
+      text-decoration: none;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
     }
-    .hero-table .td-gold {
-      color: var(--gold) !important;
-      font-weight: 500;
+    .contact-row a:hover { color: var(--gold); }
+    /* Phone: no hover cursor on desktop */
+    .phone-link { cursor: default; }
+    @media (hover: none) {
+      .phone-link { cursor: pointer; }
     }
 
     /* ── CAROUSEL ── */
-    .carousel-section {
-      padding: 80px 0 0;
-      overflow: hidden;
-    }
+    .carousel-section { padding: 70px 0 0; overflow: hidden; }
     .carousel-track-wrap {
       position: relative;
       width: 100%;
       overflow: hidden;
+      cursor: grab;
+      user-select: none;
     }
+    .carousel-track-wrap:active { cursor: grabbing; }
     .carousel-track {
       display: flex;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .carousel-slide {
       min-width: 100%;
@@ -117,73 +116,69 @@
       object-fit: cover;
       display: block;
     }
-    .carousel-dots {
+
+    /* Thumbnail strip */
+    .carousel-thumbs {
       display: flex;
-      justify-content: center;
-      gap: 8px;
-      padding: 20px 0 0;
+      gap: 6px;
+      padding: 12px 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-    .carousel-dot {
-      width: 24px;
-      height: 2px;
-      background: var(--border);
+    .carousel-thumbs::-webkit-scrollbar { display: none; }
+    .carousel-thumb {
+      min-width: 90px;
+      height: 58px;
+      overflow: hidden;
       cursor: pointer;
-      transition: background 0.3s, width 0.3s;
+      opacity: 0.35;
+      transition: opacity 0.3s;
+      border: 1px solid transparent;
+      flex-shrink: 0;
     }
-    .carousel-dot.active {
-      background: var(--gold);
-      width: 40px;
+    .carousel-thumb.active {
+      opacity: 1;
+      border-color: var(--gold);
+    }
+    .carousel-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
     }
 
-    /* ── SPECS SECTION ── */
-    .specs-full-section {
-      padding: 80px 60px 100px;
-    }
+    /* ── FULL SPECS ── */
+    .specs-full-section { padding: 80px 60px 100px; }
     .specs-full-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
+      gap: 50px;
     }
-    .specs-full-block {}
     .specs-full-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
+      font-size: 26px;
       color: var(--gold);
       letter-spacing: 0.1em;
       margin-bottom: 20px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
     }
-    .specs-full-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .specs-full-table tr {
-      border-bottom: 1px solid rgba(42,42,42,0.5);
-    }
+    .specs-full-table { width: 100%; border-collapse: collapse; }
+    .specs-full-table tr { border-bottom: 1px solid rgba(42,42,42,0.5); }
     .specs-full-table tr:last-child { border-bottom: none; }
-    .specs-full-table td {
-      padding: 10px 4px;
-      font-size: 13.5px;
-      line-height: 1.4;
-    }
-    .specs-full-table td:first-child {
-      color: var(--grey);
-      width: 55%;
-    }
-    .specs-full-table td:last-child {
-      color: var(--white);
-      text-align: right;
-    }
-    .specs-full-table .val-yes { color: #56d364; }
-    .specs-full-table .val-no  { color: #f85149; opacity: 0.7; }
+    .specs-full-table td { padding: 12px 4px; font-size: 15px; line-height: 1.4; }
+    .specs-full-table td:first-child { color: var(--grey); width: 55%; }
+    .specs-full-table td:last-child { color: var(--white); text-align: right; }
+    .val-yes { color: #56d364 !important; }
+    .val-no  { color: #f85149 !important; opacity: 0.8; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .car-hero { grid-template-columns: 1fr; min-height: auto; }
-      .car-hero-img { aspect-ratio: 16/9; height: auto; }
+      .car-hero-img { aspect-ratio: 16/9; }
       .car-hero-info { padding: 40px 24px; }
-      .car-hero-info h1 { font-size: 38px; }
+      .car-hero-info h1 { font-size: 40px; }
       .specs-full-grid { grid-template-columns: 1fr; }
       .specs-full-section { padding: 60px 24px 80px; }
     }
@@ -197,12 +192,12 @@
       <a href="index.html"><img src="images/logo.png" alt="Kupenov Auto"></a>
     </div>
     <div class="nav-contact">
-      <a href="tel:+359889017810">+359 88 901 7810</a>
-      <a href="mailto:lachezar.kupenov@gmail.com">lachezar.kupenov@gmail.com</a>
+      <a href="mailto:lachezar.kupenov@gmail.com" target="_blank">lachezar.kupenov@gmail.com</a>
+      <a href="tel:+359889017810" class="phone-link" id="navPhone">+359 88 901 7810</a>
     </div>
   </nav>
 
-  <!-- HERO: снимка + таблица -->
+  <!-- HERO -->
   <section class="car-hero">
     <div class="car-hero-img">
       <img src="images/audi_a5/DSC03483.jpg" alt="Audi A5">
@@ -217,12 +212,22 @@
         <tr><td>Конски сили</td><td>286 к.с.</td></tr>
         <tr><td>Гориво</td><td>Дизел</td></tr>
       </table>
+      <div class="hero-contacts">
+        <div class="contact-row">
+          <span class="icon">📞</span>
+          <a href="tel:+359889017810" class="phone-link" id="heroPhone">+359 88 901 7810</a>
+        </div>
+        <div class="contact-row">
+          <span class="icon">✉️</span>
+          <a href="mailto:lachezar.kupenov@gmail.com" target="_blank">lachezar.kupenov@gmail.com</a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- CAROUSEL -->
   <section class="carousel-section">
-    <div class="carousel-track-wrap">
+    <div class="carousel-track-wrap" id="carouselWrap">
       <div class="carousel-track" id="carouselTrack">
         <div class="carousel-slide"><img src="images/audi_a5/DSC03493.jpg" alt="Audi A5"></div>
         <div class="carousel-slide"><img src="images/audi_a5/DSC03494.jpg" alt="Audi A5"></div>
@@ -239,7 +244,7 @@
         <div class="carousel-slide"><img src="images/audi_a5/DSC03528.jpg" alt="Audi A5"></div>
       </div>
     </div>
-    <div class="carousel-dots" id="carouselDots"></div>
+    <div class="carousel-thumbs" id="carouselThumbs"></div>
   </section>
 
   <!-- DIVIDER -->
@@ -248,9 +253,7 @@
   <!-- FULL SPECS -->
   <section class="specs-full-section">
     <div class="specs-full-grid">
-
-      <!-- ОБЩИ -->
-      <div class="specs-full-block">
+      <div>
         <div class="specs-full-title">Общи характеристики</div>
         <table class="specs-full-table">
           <tr><td>Година на производство</td><td>Януари 2018</td></tr>
@@ -270,9 +273,7 @@
           <tr><td>Цвят</td><td>Бронз</td></tr>
         </table>
       </div>
-
-      <!-- ЕКСТРИ -->
-      <div class="specs-full-block">
+      <div>
         <div class="specs-full-title">Екстри</div>
         <table class="specs-full-table">
           <tr><td>Безключов достъп</td><td class="val-yes">Да</td></tr>
@@ -298,9 +299,7 @@
           <tr><td>Спорт пакет</td><td class="val-no">Не</td></tr>
         </table>
       </div>
-
-      <!-- АДМИНИСТРАТИВНИ -->
-      <div class="specs-full-block">
+      <div>
         <div class="specs-full-title">Административни</div>
         <table class="specs-full-table">
           <tr><td>Годишен технически преглед</td><td>До 11.2026</td></tr>
@@ -310,7 +309,6 @@
           <tr><td>Годишен данък</td><td class="val-yes">Платен 2026</td></tr>
         </table>
       </div>
-
     </div>
   </section>
 
@@ -322,33 +320,74 @@
 
   <script src="script.js"></script>
   <script>
-    // Carousel
-    const track = document.getElementById('carouselTrack');
-    const dotsContainer = document.getElementById('carouselDots');
-    const slides = track.querySelectorAll('.carousel-slide');
-    let current = 0;
+    // ── Phone: disable hover/click on desktop ──
+    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+    document.querySelectorAll('.phone-link').forEach(el => {
+      if (!isTouchDevice()) {
+        el.removeAttribute('href');
+        el.style.cursor = 'default';
+        el.style.pointerEvents = 'none';
+      }
+    });
 
-    // Create dots
-    slides.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.onclick = () => goTo(i);
-      dotsContainer.appendChild(dot);
+    // ── Carousel ──
+    const track    = document.getElementById('carouselTrack');
+    const thumbsEl = document.getElementById('carouselThumbs');
+    const wrap     = document.getElementById('carouselWrap');
+    const slides   = track.querySelectorAll('.carousel-slide');
+    const imgs     = [
+      'DSC03493','DSC03494','DSC03496','DSC03498','DSC03500',
+      'DSC03502','DSC03504','DSC03507','DSC03510','DSC03511',
+      'DSC03517','DSC03519','DSC03528'
+    ];
+    let current = 0;
+    let autoTimer;
+
+    // Build thumbnails
+    imgs.forEach((name, i) => {
+      const div = document.createElement('div');
+      div.className = 'carousel-thumb' + (i === 0 ? ' active' : '');
+      div.innerHTML = `<img src="images/audi_a5/${name}.jpg" alt="">`;
+      div.onclick = () => { goTo(i); resetAuto(); };
+      thumbsEl.appendChild(div);
     });
 
     function goTo(index) {
       current = index;
       track.style.transform = `translateX(-${current * 100}%)`;
-      document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+      document.querySelectorAll('.carousel-thumb').forEach((d, i) => {
         d.classList.toggle('active', i === current);
       });
+      // scroll active thumb into view
+      const activThumb = thumbsEl.children[current];
+      activThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 
-    // Auto-advance every 2.5 seconds
-    setInterval(() => {
-      goTo((current + 1) % slides.length);
-    }, 2500);
-  </script>
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo((current + 1) % slides.length), 2500);
+    }
 
+    resetAuto();
+
+    // ── Swipe / drag ──
+    let startX = 0, isDragging = false;
+
+    wrap.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
+    wrap.addEventListener('mousemove', e => { if (isDragging) e.preventDefault(); });
+    wrap.addEventListener('mouseup', e => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = e.clientX - startX;
+      if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
+    });
+    wrap.addEventListener('mouseleave', () => { isDragging = false; });
+
+    wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
+    });
+  </script>
 </body>
 </html>
