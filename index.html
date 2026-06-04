@@ -86,6 +86,14 @@
         setTimeout(() => el.textContent = orig, 1500);
       });
     }
+    function copyEmailIndex(el) {
+      navigator.clipboard.writeText('lachezar.kupenov@gmail.com').then(() => {
+        const span = el.querySelector('.email-text');
+        const orig = span.textContent;
+        span.textContent = 'Копирано!';
+        setTimeout(() => span.textContent = orig, 1500);
+      });
+    }
   </script>
   <script>
     const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
