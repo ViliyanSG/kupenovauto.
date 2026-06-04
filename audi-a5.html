@@ -392,6 +392,14 @@
       if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
     });
 
+    function copyEmailAudi(el) {
+      navigator.clipboard.writeText('lachezar.kupenov@gmail.com').then(() => {
+        const span = el.querySelector('.email-text');
+        const orig = span.textContent;
+        span.textContent = 'Копирано!';
+        setTimeout(() => span.textContent = orig, 1500);
+      });
+    }
     function copyEmail(el) {
       navigator.clipboard.writeText('lachezar.kupenov@gmail.com').then(() => {
         const orig = el.textContent;
