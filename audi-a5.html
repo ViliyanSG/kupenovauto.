@@ -192,8 +192,8 @@
       <a href="index.html"><img src="images/logo.png" alt="Kupenov Auto"></a>
     </div>
     <div class="nav-contact">
-      <span class="nav-email" onclick="copyEmail(this)" title="Копирай имейл" style="cursor:pointer; font-size:13px; letter-spacing:0.05em; opacity:0.8; color:var(--white);">lachezar.kupenov@gmail.com</span>
-      <a href="tel:+359889017810" class="phone-link" id="navPhone">+359 88 901 7810</a>
+      <span style="color:var(--white); font-size:13px; letter-spacing:0.05em; opacity:0.8;">lachezar.kupenov@gmail.com</span>
+      <span style="color:var(--white); font-size:13px; letter-spacing:0.05em; opacity:0.8;">+359 88 901 7810</span>
     </div>
   </nav>
 
@@ -219,7 +219,7 @@
         </div>
         <div class="contact-row">
           <span class="icon">✉️</span>
-          <span class="nav-email" onclick="copyEmail(this)" title="Копирай имейл" style="cursor:pointer; font-size:13px; letter-spacing:0.05em; opacity:0.8; color:var(--white);">lachezar.kupenov@gmail.com</span>
+          <span style="color:var(--white); font-size:13px; letter-spacing:0.05em; opacity:0.8;">lachezar.kupenov@gmail.com</span>
         </div>
       </div>
     </div>
@@ -322,13 +322,7 @@
   <script>
     // ── Phone: disable hover/click on desktop ──
     const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
-    document.querySelectorAll('.phone-link').forEach(el => {
-      if (!isTouchDevice()) {
-        el.removeAttribute('href');
-        el.style.cursor = 'default';
-        el.style.pointerEvents = 'none';
-      }
-    });
+    // phone handled via icon only
 
     // ── Carousel ──
     const track    = document.getElementById('carouselTrack');
