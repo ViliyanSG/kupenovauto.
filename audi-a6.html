@@ -135,6 +135,7 @@
       transition: opacity 0.3s;
       border: 1px solid transparent;
       flex-shrink: 0;
+      position: relative;
     }
     .carousel-thumb.active {
       opacity: 1;
@@ -144,8 +145,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
       pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
 
     /* ── FULL SPECS ── */
