@@ -152,7 +152,7 @@ nav.scrolled {
 .cars-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 2px;
+  gap: 24px;
 }
 
 /* ── CAR CARD ── */
