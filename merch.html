@@ -11,37 +11,65 @@
   <style>
     .product-hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      grid-template-columns: 0.92fr 1fr;
+      gap: 56px;
       padding: 128px 60px 80px;
       align-items: start;
     }
     .product-gallery { position: sticky; top: 100px; }
-    .product-main {
-      aspect-ratio: 1;
-      border: 1px solid var(--border);
+    .merch-carousel-wrap {
+      position: relative;
+      width: 100%;
       overflow: hidden;
+      border: 1px solid var(--border);
       background: #141414;
-      cursor: zoom-in;
+      cursor: grab;
+      user-select: none;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
     }
-    .product-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .product-thumbs {
+    .merch-carousel-wrap:active { cursor: grabbing; }
+    .merch-carousel-track {
+      display: flex;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .merch-slide {
+      min-width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      cursor: zoom-in;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .merch-slide img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .merch-thumbs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 10px;
+      gap: 8px;
+      margin-top: 8px;
     }
-    .product-thumb {
+    .merch-thumb {
       position: relative;
       aspect-ratio: 1;
-      border: 1px solid var(--border);
       overflow: hidden;
       cursor: pointer;
-      opacity: 0.55;
-      transition: opacity 0.25s, border-color 0.25s;
+      opacity: 0.45;
+      border: 1px solid transparent;
+      transition: opacity 0.3s, border-color 0.3s;
     }
-    .product-thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-    .product-thumb.active, .product-thumb:hover { opacity: 1; border-color: var(--gold); }
+    .merch-thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .merch-thumb.active, .merch-thumb:hover { opacity: 1; border-color: var(--gold); }
 
     .product-info { display: flex; flex-direction: column; }
     .back-link {
@@ -122,14 +150,14 @@
   <!-- PRODUCT -->
   <section class="product-hero">
     <div class="product-gallery">
-      <div class="product-main" onclick="openLightbox(lbIndex)">
-        <img id="productMain" src="images/merch/1.jpg" alt="Steel Excellence ключодържател">
+      <div class="merch-carousel-wrap" id="merchWrap">
+        <div class="merch-carousel-track" id="merchTrack">
+          <div class="merch-slide" onclick="openLightbox(0)"><img src="images/merch/1.jpg" alt="Steel Excellence ключодържател"></div>
+          <div class="merch-slide" onclick="openLightbox(1)"><img src="images/merch/2.jpg" alt="Steel Excellence ключодържател"></div>
+          <div class="merch-slide" onclick="openLightbox(2)"><img src="images/merch/3.jpg" alt="Steel Excellence ключодържател"></div>
+        </div>
       </div>
-      <div class="product-thumbs">
-        <div class="product-thumb active" onclick="setImg(this,0)"><img src="images/merch/1.jpg" alt=""></div>
-        <div class="product-thumb" onclick="setImg(this,1)"><img src="images/merch/2.jpg" alt=""></div>
-        <div class="product-thumb" onclick="setImg(this,2)"><img src="images/merch/3.jpg" alt=""></div>
-      </div>
+      <div class="merch-thumbs" id="merchThumbs"></div>
     </div>
 
     <div class="product-info">
@@ -192,29 +220,59 @@
 
   <script src="script.js"></script>
   <script>
-    const imgs = ['1', '2', '3'];
-    let lbIndex = 0;
+    const track    = document.getElementById('merchTrack');
+    const thumbsEl = document.getElementById('merchThumbs');
+    const wrap     = document.getElementById('merchWrap');
+    const slides   = track.querySelectorAll('.merch-slide');
+    const imgs     = ['1', '2', '3'];
+    let current = 0, lbIndex = 0, autoTimer, isVisible = true;
 
-    function setImg(el, i) {
-      lbIndex = i;
-      document.getElementById('productMain').src = 'images/merch/' + imgs[i] + '.jpg';
-      document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
+    imgs.forEach((name, i) => {
+      const div = document.createElement('div');
+      div.className = 'merch-thumb' + (i === 0 ? ' active' : '');
+      div.innerHTML = `<img src="images/merch/${name}.jpg" alt="">`;
+      div.onclick = () => { goTo(i); resetAuto(); };
+      thumbsEl.appendChild(div);
+    });
+
+    function goTo(index) {
+      current = index;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.merch-thumb').forEach((d, i) => d.classList.toggle('active', i === current));
     }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => { if (isVisible) goTo((current + 1) % slides.length); }, 10000);
+    }
+    window.addEventListener('scroll', () => {
+      const rect = wrap.getBoundingClientRect();
+      isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    }, { passive: true });
+    resetAuto();
 
-    function openLightbox(i) { lbIndex = i; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }
-    function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
+    let startX = 0, isDragging = false;
+    wrap.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
+    wrap.addEventListener('mousemove', e => { if (isDragging) e.preventDefault(); });
+    wrap.addEventListener('mouseup', e => {
+      if (!isDragging) return; isDragging = false;
+      const diff = e.clientX - startX;
+      if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
+    });
+    wrap.addEventListener('mouseleave', () => { isDragging = false; });
+    wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
+    });
+
+    function openLightbox(i) { lbIndex = i; isVisible = false; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; isVisible = true; }
     function closeLightboxOutside(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
-    function lightboxPrev(e) { e.stopPropagation(); lbIndex = (lbIndex - 1 + imgs.length) % imgs.length; updateLightbox(); syncThumb(); }
-    function lightboxNext(e) { e.stopPropagation(); lbIndex = (lbIndex + 1) % imgs.length; updateLightbox(); syncThumb(); }
+    function lightboxPrev(e) { e.stopPropagation(); lbIndex = (lbIndex - 1 + imgs.length) % imgs.length; updateLightbox(); goTo(lbIndex); }
+    function lightboxNext(e) { e.stopPropagation(); lbIndex = (lbIndex + 1) % imgs.length; updateLightbox(); goTo(lbIndex); }
     function updateLightbox() {
       document.getElementById('lightboxImg').src = 'images/merch/' + imgs[lbIndex] + '.jpg';
       document.getElementById('lightboxCounter').textContent = (lbIndex + 1) + ' / ' + imgs.length;
-    }
-    function syncThumb() {
-      const thumbs = document.querySelectorAll('.product-thumb');
-      thumbs.forEach((t, i) => t.classList.toggle('active', i === lbIndex));
-      document.getElementById('productMain').src = 'images/merch/' + imgs[lbIndex] + '.jpg';
     }
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeOrderModal();
