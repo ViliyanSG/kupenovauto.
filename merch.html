@@ -75,13 +75,13 @@
     .product-specs td:last-child { color: var(--white); text-align: right; }
     .product-cta {
       align-self: flex-start;
-      background: var(--gold); color: var(--black);
+      background: transparent; color: var(--gold);
       font-family: 'Jost', sans-serif; font-size: 13px;
       letter-spacing: 0.2em; text-transform: uppercase;
       padding: 16px 40px; cursor: pointer; text-decoration: none;
       border: 1px solid var(--gold); transition: background 0.2s, color 0.2s;
     }
-    .product-cta:hover { background: transparent; color: var(--gold); }
+    .product-cta:hover { background: var(--gold); color: var(--black); }
 
     @media (max-width: 900px) {
       .product-hero { grid-template-columns: 1fr; gap: 32px; padding: 104px 24px 60px; }
