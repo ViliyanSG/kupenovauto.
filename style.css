@@ -337,6 +337,23 @@ footer p { font-size: 12px; color: var(--grey); letter-spacing: 0.08em; }
   color: var(--white);
 }
 
+/* ── CONTACT CTA BUTTON ── */
+.contact-cta {
+  align-self: flex-start;
+  background: transparent;
+  color: var(--gold);
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 16px 44px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  transition: background 0.2s, color 0.2s;
+}
+.contact-cta:hover { background: var(--gold); color: var(--black); }
+
 /* ── SERVICE MODAL ── */
 .service-modal-overlay {
   position: fixed;
