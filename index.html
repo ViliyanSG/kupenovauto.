@@ -140,33 +140,17 @@
 
   <!-- MERCH -->
   <div class="divider"><span>Мърч</span></div>
-  <section class="merch-section">
-    <div class="merch-grid">
-      <div class="merch-gallery">
-        <div class="merch-main">
-          <img id="merchMain" src="images/merch/1.jpg" alt="Steel Excellence ключодържател">
+  <section class="cars-section">
+    <div class="cars-grid">
+      <div class="car-card" onclick="window.location.href='merch.html'" style="cursor:pointer;">
+        <div class="car-img-wrap">
+          <span class="car-badge">Ново</span>
+          <img src="images/merch/1.jpg" alt="Steel Excellence ключодържател">
         </div>
-        <div class="merch-thumbs">
-          <div class="merch-thumb active" onclick="setMerch(this,'images/merch/1.jpg')"><img src="images/merch/1.jpg" alt=""></div>
-          <div class="merch-thumb" onclick="setMerch(this,'images/merch/2.jpg')"><img src="images/merch/2.jpg" alt=""></div>
-          <div class="merch-thumb" onclick="setMerch(this,'images/merch/3.jpg')"><img src="images/merch/3.jpg" alt=""></div>
+        <div class="car-info">
+          <h2>Steel Excellence</h2>
+          <div class="car-price" style="font-size:16px;color:var(--grey);">Ключодържател</div>
         </div>
-      </div>
-      <div class="merch-info">
-        <span class="merch-badge">Ограничено количество</span>
-        <h2 class="merch-name">Ключодържател <span>Steel Excellence</span></h2>
-        <p class="merch-desc">Добавете стилен завършек към своя автомобилен ключ с този изчистен и елегантен ключодържател, създаден за шофьори, които държат на детайла. Минималистичният му дизайн, тъмното покритие и дискретната визия го правят идеалният аксесоар. Изработен от неръждаема стомана, той съчетава здравина и стил.</p>
-        <p class="merch-desc">Лек и дискретен, но с усещане за класа и индивидуалност. Практичен за ежедневна употреба и достатъчно изискан, за да бъде поднесен като подарък.</p>
-        <div class="merch-specs">
-          <div class="merch-specs-title">Характеристики</div>
-          <table class="specs-table">
-            <tr><td>Материал</td><td>Неръждаема стомана</td></tr>
-            <tr><td>Ринг</td><td>За лесно поставяне</td></tr>
-            <tr><td>Надпис</td><td>Лазерно гравиран</td></tr>
-            <tr><td>Изработка</td><td>Здрава и дълготрайна</td></tr>
-          </table>
-        </div>
-        <a href="https://www.instagram.com/kupenov.v?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="merch-cta">Свържи се за поръчка</a>
       </div>
     </div>
   </section>
@@ -237,11 +221,6 @@
       document.body.style.overflow = '';
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeService(); });
-    function setMerch(el, src) {
-      document.getElementById('merchMain').src = src;
-      document.querySelectorAll('.merch-thumb').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-    }
     function copyMail(el) {
       navigator.clipboard.writeText('lachezar.kupenov@gmail.com').then(() => {
         const span = el.querySelector('span:last-child');
