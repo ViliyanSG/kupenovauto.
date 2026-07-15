@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMW 330e — Kupenov Auto</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .car-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+      padding-top: 88px;
+    }
+    .car-hero-img { position: relative; overflow: hidden; }
+    .car-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .car-hero-info {
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 70px;
+      border-left: 1px solid var(--border);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--gold); }
+    .car-hero-info h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 58px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .car-hero-info h1 span { color: var(--gold); }
+    .car-hero-price {
+      font-size: 36px;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 40px;
+    }
+    .hero-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+    .hero-table tr { border-bottom: 1px solid var(--border); }
+    .hero-table tr:last-child { border-bottom: none; }
+    .hero-table td { padding: 16px 0; font-size: 16px; }
+    .hero-table td:first-child { color: var(--grey); width: 50%; }
+    .hero-table td:last-child { color: var(--white); text-align: right; font-weight: 400; }
+    .hero-table .td-gold { color: var(--gold) !important; font-weight: 500; }
+    .hero-contacts { display: flex; flex-direction: column; gap: 12px; }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .contact-row:hover { border-color: var(--gold); }
+
+    .carousel-section { padding: 70px 0 0; overflow: hidden; }
+    .carousel-slide { cursor: zoom-in; }
+    .carousel-track-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      cursor: grab;
+      user-select: none;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+    .carousel-track-wrap:active { cursor: grabbing; }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .carousel-slide {
+      min-width: 100%;
+      aspect-ratio: 16/7;
+      overflow: hidden;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+    .carousel-thumbs {
+      display: flex;
+      gap: 6px;
+      padding: 12px 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .carousel-thumbs::-webkit-scrollbar { display: none; }
+    .carousel-thumb {
+      min-width: 90px;
+      height: 58px;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.35;
+      transition: opacity 0.3s;
+      border: 1px solid transparent;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .carousel-thumb.active { opacity: 1; border-color: var(--gold); }
+    .carousel-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .specs-full-section { padding: 80px 60px 100px; }
+    .specs-full-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px;
+    }
+    .specs-full-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .specs-full-table { width: 100%; border-collapse: collapse; }
+    .specs-full-table tr { border-bottom: 1px solid rgba(42,42,42,0.5); }
+    .specs-full-table tr:last-child { border-bottom: none; }
+    .specs-full-table td { padding: 12px 4px; font-size: 15px; line-height: 1.4; }
+    .specs-full-table td:first-child { color: var(--grey); width: 55%; }
+    .specs-full-table td:last-child { color: var(--white); text-align: right; }
+    .val-yes { color: #56d364 !important; }
+    .val-no  { color: #f85149 !important; opacity: 0.8; }
+
+    @media (max-width: 900px) {
+      .car-hero { grid-template-columns: 1fr; min-height: auto; }
+      .car-hero-img { aspect-ratio: 16/9; }
+      .car-hero-info { padding: 40px 24px; }
+      .car-hero-info h1 { font-size: 40px; }
+      .specs-full-grid { grid-template-columns: 1fr; }
+      .specs-full-section { padding: 60px 24px 80px; }
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; user-select: none; pointer-events: none; }
+    .lightbox-close { position: absolute; top: 20px; right: 28px; font-size: 36px; color: var(--white); cursor: pointer; opacity: 0.7; transition: opacity 0.2s; line-height: 1; z-index: 10; }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 48px; color: var(--white); cursor: pointer; opacity: 0.6; transition: opacity 0.2s; padding: 20px; user-select: none; z-index: 10; }
+    .lightbox-arrow:hover { opacity: 1; }
+    .lightbox-arrow.prev { left: 10px; }
+    .lightbox-arrow.next { right: 10px; }
+    .lightbox-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: var(--grey); font-size: 13px; letter-spacing: 0.2em; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <a href="index.html"><img src="images/logo.png" alt="Kupenov Auto"></a>
+    </div>
+    <div class="nav-contact">
+      <a href="#" onclick="navigator.clipboard.writeText('lachezar.kupenov@gmail.com');event.preventDefault();" style="color:var(--white);font-size:13px;letter-spacing:0.05em;opacity:0.8;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white)'">lachezar.kupenov@gmail.com</a>
+      <a href="tel:+359889017810" style="color:var(--white);font-size:13px;letter-spacing:0.05em;opacity:0.8;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white)'">+359 88 901 7810</a>
+      <a href="https://www.instagram.com/kupenov.v?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color:var(--white);font-size:13px;letter-spacing:0.05em;opacity:0.8;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white)'">Instagram</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="car-hero">
+    <div class="car-hero-img">
+      <img src="images/bmw_330e/7.jpg" alt="BMW 330e">
+    </div>
+    <div class="car-hero-info">
+      <a href="index.html" class="back-link">← Назад към всички автомобили</a>
+      <h1>BMW <span>330e</span></h1>
+      <div class="car-hero-price">38 900 EUR</div>
+      <table class="hero-table">
+        <tr><td>Модел</td><td class="td-gold">BMW 330e xDrive</td></tr>
+        <tr><td>Година на производство</td><td>Юли 2022</td></tr>
+        <tr><td>Конски сили</td><td>292 к.с.</td></tr>
+        <tr><td>Гориво</td><td>Бензин + Електричество</td></tr>
+        <tr><td>Салон</td><td>Кожен</td></tr>
+      </table>
+      <button class="contact-cta" onclick="openContactModal()">Свържи се</button>
+    </div>
+  </section>
+
+  <!-- CAROUSEL -->
+  <section class="carousel-section">
+    <div class="carousel-track-wrap" id="carouselWrap">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide" onclick="openLightbox(0)"><img src="images/bmw_330e/1.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(1)"><img src="images/bmw_330e/2.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(2)"><img src="images/bmw_330e/3.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(3)"><img src="images/bmw_330e/4.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(4)"><img src="images/bmw_330e/5.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(5)"><img src="images/bmw_330e/6.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(6)"><img src="images/bmw_330e/7.jpg" alt="BMW 330e"></div>
+      </div>
+    </div>
+    <div class="carousel-thumbs" id="carouselThumbs"></div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div class="divider"><span>Технически характеристики</span></div>
+
+  <!-- FULL SPECS -->
+  <section class="specs-full-section">
+    <div class="specs-full-grid">
+      <div>
+        <div class="specs-full-title">Общи характеристики</div>
+        <table class="specs-full-table">
+          <tr><td>Година на производство</td><td>Юли 2022</td></tr>
+          <tr><td>Фейслифт</td><td class="val-yes">Да</td></tr>
+          <tr><td>Километри</td><td>13 800</td></tr>
+          <tr><td>Гориво</td><td>Бензин + Електричество</td></tr>
+          <tr><td>Кубатура на двигател</td><td>1 998 см³</td></tr>
+          <tr><td>Код на двигател</td><td>B48B20</td></tr>
+          <tr><td>Скоростна кутия</td><td>Автоматична</td></tr>
+          <tr><td>Задвижване</td><td>4×4 (xDrive)</td></tr>
+          <tr><td>Размер на гуми</td><td>225/45/18 | 225/40/18</td></tr>
+          <tr><td>Конски сили</td><td>292</td></tr>
+          <tr><td>Нютон метри</td><td>420 комбинирано (300 ДВГ / 265 ел.)</td></tr>
+          <tr><td>Турбо</td><td class="val-yes">Да</td></tr>
+          <tr><td>Произход</td><td>Германия</td></tr>
+          <tr><td>Ускорение 0–100 км/ч</td><td>5.8 сек.</td></tr>
+          <tr><td>Цвят</td><td>Черен</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="specs-full-title">Екстри</div>
+        <table class="specs-full-table">
+          <tr><td>Безключов достъп</td><td class="val-yes">Да</td></tr>
+          <tr><td>Подгрев седалки</td><td class="val-yes">Да</td></tr>
+          <tr><td>Подгрев волан</td><td class="val-yes">Да</td></tr>
+          <tr><td>Вентилация на седалки</td><td class="val-no">Не</td></tr>
+          <tr><td>Подгрев челно стъкло</td><td class="val-no">Не</td></tr>
+          <tr><td>Панорама</td><td class="val-yes">Да</td></tr>
+          <tr><td>360° камера</td><td class="val-no">Не</td></tr>
+          <tr><td>Парктроник</td><td class="val-yes">Да</td></tr>
+          <tr><td>Паркинг асистент</td><td class="val-yes">Да</td></tr>
+          <tr><td>Адаптивен автопилот</td><td class="val-yes">Да</td></tr>
+          <tr><td>Вид салон</td><td>Кожен</td></tr>
+          <tr><td>Електрически багажник</td><td class="val-yes">Да</td></tr>
+          <tr><td>Затъмнени стъкла</td><td class="val-yes">Да</td></tr>
+          <tr><td>Прибиране на огледала</td><td class="val-yes">Да</td></tr>
+          <tr><td>Електрически седалки</td><td class="val-yes">Да</td></tr>
+          <tr><td>Carplay / Android Auto</td><td class="val-yes">Да</td></tr>
+          <tr><td>Heads Up Display</td><td class="val-no">Не</td></tr>
+          <tr><td>Озвучителна система</td><td>BMW Stereo</td></tr>
+          <tr><td>Задна камера</td><td class="val-yes">Да</td></tr>
+          <tr><td>Фарове</td><td>—</td></tr>
+          <tr><td>Спорт пакет</td><td class="val-yes">Да</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="specs-full-title">Административни</div>
+        <table class="specs-full-table">
+          <tr><td>Годишен технически преглед</td><td>—</td></tr>
+          <tr><td>Застраховка ГО</td><td>—</td></tr>
+          <tr><td>Каско</td><td>—</td></tr>
+          <tr><td>Винетка</td><td>—</td></tr>
+          <tr><td>Годишен данък</td><td>—</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+    <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+    <span class="lightbox-arrow prev" onclick="lightboxPrev(event)">&#8592;</span>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <span class="lightbox-arrow next" onclick="lightboxNext(event)">&#8594;</span>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- CONTACT MODAL -->
+  <div class="service-modal-overlay" id="contactModal" onclick="if(event.target===this)closeContactModal()">
+    <div class="service-modal">
+      <span class="service-modal-close" onclick="closeContactModal()">✕</span>
+      <h3 class="service-modal-title">Свържете се</h3>
+      <div class="service-modal-rule"></div>
+      <p class="service-modal-text" style="margin-bottom:26px;">За оглед, въпроси или допълнителна информация — свържете се с нас.</p>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <a href="tel:+359889017810" class="contact-row" style="text-decoration:none; display:flex; align-items:center; gap:14px; padding:16px 20px; border:1px solid var(--border); transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.03z"/></svg>
+          <span style="color:var(--white); font-size:15px; letter-spacing:0.04em;">+359 88 901 7810</span>
+        </a>
+        <div class="contact-row" onclick="copyMail(this)" style="display:flex; align-items:center; gap:14px; padding:16px 20px; border:1px solid var(--border); transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span style="color:var(--white); font-size:15px; letter-spacing:0.04em;">lachezar.kupenov@gmail.com</span>
+        </div>
+        <a href="https://www.instagram.com/kupenov.v?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="contact-row" style="text-decoration:none; display:flex; align-items:center; gap:14px; padding:16px 20px; border:1px solid var(--border); transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="var(--gold)"/></svg>
+          <span style="color:var(--white); font-size:15px; letter-spacing:0.04em;">Instagram</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html"><img src="images/logo.png" alt="Kupenov Auto"></a>
+    <p>© 2026 Kupenov Auto — Driven by excellence</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const track    = document.getElementById('carouselTrack');
+    const thumbsEl = document.getElementById('carouselThumbs');
+    const wrap     = document.getElementById('carouselWrap');
+    const slides   = track.querySelectorAll('.carousel-slide');
+    const imgs     = ['1','2','3','4','5','6','7'];
+    let current = 0, autoTimer;
+
+    imgs.forEach((name, i) => {
+      const div = document.createElement('div');
+      div.className = 'carousel-thumb' + (i === 0 ? ' active' : '');
+      div.innerHTML = `<img src="images/bmw_330e/${name}.jpg" alt="">`;
+      div.onclick = () => { goTo(i); resetAuto(); };
+      thumbsEl.appendChild(div);
+    });
+
+    function goTo(index) {
+      current = index;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      document.querySelectorAll('.carousel-thumb').forEach((d, i) => d.classList.toggle('active', i === current));
+      thumbsEl.children[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => { if (isVisible) goTo((current + 1) % slides.length); }, 10000);
+    }
+
+    let isVisible = true;
+    window.addEventListener('scroll', () => {
+      const rect = wrap.getBoundingClientRect();
+      isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    }, { passive: true });
+    resetAuto();
+
+    let startX = 0, isDragging = false;
+    wrap.addEventListener('mousedown', e => { startX = e.clientX; isDragging = true; });
+    wrap.addEventListener('mousemove', e => { if (isDragging) e.preventDefault(); });
+    wrap.addEventListener('mouseup', e => {
+      if (!isDragging) return; isDragging = false;
+      const diff = e.clientX - startX;
+      if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
+    });
+    wrap.addEventListener('mouseleave', () => { isDragging = false; });
+    wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diff) > 50) { goTo(diff < 0 ? Math.min(current+1, slides.length-1) : Math.max(current-1, 0)); resetAuto(); }
+    });
+  </script>
+  <script>
+    const lbImgs = ['1','2','3','4','5','6','7'];
+    let lbIndex = 0;
+
+    function openLightbox(i) { lbIndex = i; isVisible = false; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; isVisible = true; }
+    function closeLightboxOutside(e) { if (e.target === document.getElementById('lightbox')) closeLightbox(); }
+    function lightboxPrev(e) { e.stopPropagation(); lbIndex = (lbIndex - 1 + lbImgs.length) % lbImgs.length; updateLightbox(); }
+    function lightboxNext(e) { e.stopPropagation(); lbIndex = (lbIndex + 1) % lbImgs.length; updateLightbox(); }
+    function updateLightbox() {
+      document.getElementById('lightboxImg').src = 'images/bmw_330e/' + lbImgs[lbIndex] + '.jpg';
+      document.getElementById('lightboxCounter').textContent = (lbIndex + 1) + ' / ' + lbImgs.length;
+    }
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') lightboxPrev(e);
+      if (e.key === 'ArrowRight') lightboxNext(e);
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    function openContactModal() { document.getElementById('contactModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeContactModal() { document.getElementById('contactModal').classList.remove('open'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeContactModal(); });
+
+    function copyMail(el) {
+      navigator.clipboard.writeText('lachezar.kupenov@gmail.com').then(() => {
+        const span = el.querySelector('span:last-child');
+        const orig = span.textContent;
+        span.textContent = '✓ Копирано!';
+        el.style.borderColor = 'var(--gold)';
+        setTimeout(() => { span.textContent = orig; el.style.borderColor = ''; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
