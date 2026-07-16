@@ -238,7 +238,6 @@
         <div class="carousel-slide" onclick="openLightbox(3)"><img src="images/bmw_x2_m35i/4.jpg" alt="BMW X2 M35i"></div>
         <div class="carousel-slide" onclick="openLightbox(4)"><img src="images/bmw_x2_m35i/5.jpg" alt="BMW X2 M35i"></div>
         <div class="carousel-slide" onclick="openLightbox(5)"><img src="images/bmw_x2_m35i/6.jpg" alt="BMW X2 M35i"></div>
-        <div class="carousel-slide" onclick="openLightbox(6)"><img src="images/bmw_x2_m35i/7.jpg" alt="BMW X2 M35i"></div>
       </div>
     </div>
     <div class="carousel-thumbs" id="carouselThumbs"></div>
@@ -354,7 +353,7 @@
     const thumbsEl = document.getElementById('carouselThumbs');
     const wrap     = document.getElementById('carouselWrap');
     const slides   = track.querySelectorAll('.carousel-slide');
-    const imgs     = ['1','2','3','4','5','6','7'];
+    const imgs     = ['1','2','3','4','5','6'];
     let current = 0, autoTimer;
 
     imgs.forEach((name, i) => {
@@ -400,7 +399,7 @@
     });
   </script>
   <script>
-    const lbImgs = ['1','2','3','4','5','6','7'];
+    const lbImgs = ['1','2','3','4','5','6'];
     let lbIndex = 0;
 
     function openLightbox(i) { lbIndex = i; isVisible = false; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }
