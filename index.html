@@ -16,10 +16,24 @@
     <div class="nav-logo">
       <img src="images/logo.png" alt="Kupenov Auto">
     </div>
-    <div class="nav-contact">
-      <a href="#" onclick="navigator.clipboard.writeText('lachezar.kupenov@gmail.com');event.preventDefault();" style="color:var(--white);font-size:13px;letter-spacing:0.05em;opacity:0.8;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white)'">lachezar.kupenov@gmail.com</a>
-      <a href="tel:+359889017810" style="color:var(--white);font-size:13px;letter-spacing:0.05em;opacity:0.8;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white)'">+359 88 901 7810</a>
-      <a href="https://www.instagram.com/kupenov.v?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color:var(--white);font-size:13px;letter-spacing:0.05em;opacity:0.8;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white)'">Instagram</a>
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false" aria-label="Език / Language">
+        <span class="lang-flag" id="langCurrentFlag">
+          <svg viewBox="0 0 5 3" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="5" height="3" fill="#fff"/><rect y="1" width="5" height="1" fill="#00966e"/><rect y="2" width="5" height="1" fill="#d62612"/></svg>
+        </span>
+        <span class="lang-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="lang-menu" id="langMenu" role="menu">
+        <button class="lang-option active" data-lang="bg" role="menuitemradio" aria-label="Български">
+          <span class="lang-flag"><svg viewBox="0 0 5 3" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="5" height="3" fill="#fff"/><rect y="1" width="5" height="1" fill="#00966e"/><rect y="2" width="5" height="1" fill="#d62612"/></svg></span>
+        </button>
+        <button class="lang-option" data-lang="ru" role="menuitemradio" aria-label="Русский">
+          <span class="lang-flag"><svg viewBox="0 0 9 6" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="9" height="6" fill="#fff"/><rect y="2" width="9" height="2" fill="#0039a6"/><rect y="4" width="9" height="2" fill="#d52b1e"/></svg></span>
+        </button>
+        <button class="lang-option" data-lang="en" role="menuitemradio" aria-label="English">
+          <span class="lang-flag"><svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><clipPath id="ukc"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="ukt"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#ukc)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ukt)" stroke="#c8102e" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#c8102e" stroke-width="6"/></g></svg></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -35,106 +49,182 @@
   <!-- DIVIDER -->
   <div class="divider"><span>Налични автомобили</span></div>
 
+  <!-- FILTER -->
+  <div class="car-filter">
+    <div class="filter-dropdown" id="sortDropdown">
+      <button class="filter-dropdown-btn" id="sortBtn" aria-haspopup="true" aria-expanded="false">
+        <span class="filter-btn-pre">Подредба:</span>
+        <span id="sortBtnLabel">Последно добавени</span>
+        <span class="filter-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="filter-menu filter-menu--single" id="sortMenu" role="menu">
+        <button class="filter-option active" data-sort="default" role="menuitemradio">Последно добавени</button>
+        <button class="filter-option" data-sort="asc" role="menuitemradio">↑ Възходяща сума</button>
+        <button class="filter-option" data-sort="desc" role="menuitemradio">↓ Низходяща сума</button>
+        <button class="filter-option" data-sort="year-asc" role="menuitemradio">↑ Възходяща година</button>
+        <button class="filter-option" data-sort="year-desc" role="menuitemradio">↓ Низходяща година</button>
+      </div>
+    </div>
+    <div class="filter-dropdown" id="filterDropdown">
+      <button class="filter-dropdown-btn" id="filterBtn" aria-haspopup="true" aria-expanded="false">
+        <span class="filter-btn-pre">Клас:</span>
+        <span id="filterBtnLabel">Всички</span>
+        <span class="filter-caret" aria-hidden="true">▾</span>
+      </button>
+      <div class="filter-menu" id="filterMenu" role="menu">
+        <button class="filter-option active" data-filter="all" role="menuitemcheckbox">Всички</button>
+        <button class="filter-option active" data-filter="everyday" role="menuitemcheckbox">Ежедневен</button>
+        <button class="filter-option active" data-filter="sport" role="menuitemcheckbox">Спортен</button>
+        <button class="filter-option active" data-filter="luxury" role="menuitemcheckbox">Луксозен</button>
+      </div>
+    </div>
+  </div>
+
   <!-- CARS -->
   <section class="cars-section">
     <div class="cars-grid">
 
-      <div class="car-card" onclick="window.location.href='honda-jazz.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="everyday" data-price="7500" data-year="201203" onclick="window.location.href='honda-jazz.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/honda_jazz/1.jpg" alt="Honda Jazz">
         </div>
         <div class="car-info">
-          <h2>Honda Jazz</h2>
-          <div class="car-price">7 500 EUR</div>
+          <div class="car-info-main">
+            <h2>Honda Jazz</h2>
+            <div class="car-price">7 500 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Ежедневен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='bmw-330d.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="luxury" data-price="45990" data-year="202508" onclick="window.location.href='bmw-330d.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/bmw_330d/1.jpg" alt="BMW 330d xDrive">
         </div>
         <div class="car-info">
-          <h2>BMW 330d</h2>
-          <div class="car-price">45 990 EUR</div>
+          <div class="car-info-main">
+            <h2>BMW 330d</h2>
+            <div class="car-price">45 990 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Луксозен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='bmw-x2-m35i.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="luxury" data-price="53900" data-year="202407" onclick="window.location.href='bmw-x2-m35i.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/bmw_x2_m35i/1.jpg" alt="BMW X2 M35i">
         </div>
         <div class="car-info">
-          <h2>BMW X2 M35i</h2>
-          <div class="car-price">53 900 EUR</div>
+          <div class="car-info-main">
+            <h2>BMW X2 M35i</h2>
+            <div class="car-price">53 900 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Луксозен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='bmw-330e.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="sport" data-price="38900" data-year="202207" onclick="window.location.href='bmw-330e.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/bmw_330e/1.jpg" alt="BMW 330e">
         </div>
         <div class="car-info">
-          <h2>BMW 330e</h2>
-          <div class="car-price">38 900 EUR</div>
+          <div class="car-info-main">
+            <h2>BMW 330e</h2>
+            <div class="car-price">38 900 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Спортен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='bmw-318d.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="everyday" data-price="25990" data-year="202402" onclick="window.location.href='bmw-318d.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/bmw_318d/1.jpg" alt="BMW 318d Touring">
         </div>
         <div class="car-info">
-          <h2>BMW 318d</h2>
-          <div class="car-price">25 990 EUR</div>
+          <div class="car-info-main">
+            <h2>BMW 318d</h2>
+            <div class="car-price">25 990 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Ежедневен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='bmw-330xi.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="everyday" data-price="6500" data-year="200706" onclick="window.location.href='bmw-330xi.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/bmw_330xi/1.jpg" alt="BMW 330xi Touring">
         </div>
         <div class="car-info">
-          <h2>BMW 330xi</h2>
-          <div class="car-price">6 500 EUR</div>
+          <div class="car-info-main">
+            <h2>BMW 330xi</h2>
+            <div class="car-price">6 500 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Ежедневен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='bmw-325ix.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="everyday" data-price="7000" data-year="200901" onclick="window.location.href='bmw-325ix.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/bmw_e91/1.jpg" alt="BMW 325i Touring">
         </div>
         <div class="car-info">
-          <h2>BMW 325iX</h2>
-          <div class="car-price">7 000 EUR</div>
+          <div class="car-info-main">
+            <h2>BMW 325iX</h2>
+            <div class="car-price">7 000 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Ежедневен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='audi-a5.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="sport" data-price="26000" data-year="201801" onclick="window.location.href='audi-a5.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/audi_a5/1.jpg" alt="Audi A5">
         </div>
         <div class="car-info">
-          <h2>Audi A5</h2>
-          <div class="car-price">26 000 EUR</div>
+          <div class="car-info-main">
+            <h2>Audi A5</h2>
+            <div class="car-price">26 000 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Спортен</span>
+          </div>
         </div>
       </div>
 
-      <div class="car-card" onclick="window.location.href='audi-a6.html'" style="cursor:pointer;">
+      <div class="car-card" data-class="everyday" data-price="6000" data-year="200602" onclick="window.location.href='audi-a6.html'" style="cursor:pointer;">
         <div class="car-img-wrap">
-          <span class="car-badge">Налично</span>
           <img src="images/audi_a6/1.jpg" alt="Audi A6 Allroad">
         </div>
         <div class="car-info">
-          <h2>Audi A6 Allroad</h2>
-          <div class="car-price">6 000 EUR</div>
+          <div class="car-info-main">
+            <h2>Audi A6 Allroad</h2>
+            <div class="car-price">6 000 EUR</div>
+          </div>
+          <div class="car-tags">
+            <span class="tag-available">Налично</span>
+            <span class="tag-class">Ежедневен</span>
+          </div>
         </div>
       </div>
 
@@ -199,8 +289,8 @@
   <!-- CONTACT -->
   <section class="contact-section">
     <div class="contact-left">
-      <h2>Свържете се<br>с <span>нас</span></h2>
-      <p>За въпроси, огледи или допълнителна информация — не се колебайте да се свържете с нас.</p>
+      <h2 data-i18n-html="contact-title">Свържете се<br>с <span>нас</span></h2>
+      <p data-i18n-html="contact-sub">За въпроси, огледи или допълнителна информация — не се колебайте да се свържете с нас.</p>
     </div>
     <div class="contact-right">
       <a href="tel:+359889017810" class="contact-item" style="text-decoration:none; display:flex; align-items:center; gap:16px; padding:20px 24px; border:1px solid var(--border); transition:border-color 0.2s; cursor:pointer;">
@@ -226,34 +316,114 @@
   </footer>
 
   <script src="script.js"></script>
-    <script>
-    const services = [
-      {
-        icon: '<img src="images/services/import.png" alt="">',
-        title: 'Внос на автомобил по поръчка',
-        text: 'Предлагаме цялостно съдействие при внос на автомобили по поръчка, съобразено с Вашите изисквания за марка, година на производство, пробег, бюджет и оборудване. Работим с наши доказани партньори по цял свят и внасяме автомобили от Южна Корея, цяла Европа, САЩ и Канада. Извършваме предварителна проверка на всеки автомобил, анализ на неговата история и състояние. Организираме процеса по транспортиране до България. Нашата цел е да получите автомобил с доказан произход, реално състояние и максимално добра стойност според Вашия бюджет.'
-      },
-      {
-        icon: '<img src="images/services/buyback.png" alt="">',
-        title: 'Изкупуване на стария Ви автомобил',
-        text: 'Ако желаете да продадете настоящия си автомобил, предлагаме бърза и коректна оценка според неговото състояние, година, пробег, пазарна стойност и технически характеристики. Изкупуването може да бъде извършено като отделна сделка или като част от покупката на нов автомобил. Осигуряваме удобен процес, ясни условия и спестяване на време при търсенето на купувач.'
-      },
-      {
-        icon: '<img src="images/services/kat.png" alt="">',
-        title: 'Съдействие в КАТ',
-        text: 'Оказваме съдействие при административните процедури, свързани с регистрация, пререгистрация, смяна на собственост, издаване на регистрационни табели и подготовка на необходимите документи. Целта е да улесним процеса и да Ви спестим време, като Ви насочим през всички необходими стъпки за коректно и спокойно приключване на регистрацията.'
-      },
-      {
-        icon: '<img src="images/services/search.png" alt="">',
-        title: 'Съдействие при намиране на автомобил',
-        text: 'Помагаме Ви да откриете автомобил, който отговаря на Вашите нужди, предпочитания и бюджет. Анализираме пазара, сравняваме оферти, проверяваме историята и състоянието на избрани автомобили и Ви консултираме при вземането на решение. Независимо дали търсите семеен автомобил, градска кола, SUV, бизнес автомобил или лекотоварен модел, съдействаме за намиране на подходящо и сигурно решение.'
+  <script src="i18n.js"></script>
+  <script>
+    (function () {
+      const grid = document.querySelector('.cars-grid');
+      const cards = Array.from(document.querySelectorAll('.car-card[data-class]'));
+      const origOrder = new Map(cards.map((c, i) => [c, i]));
+
+      const dropdowns = Array.from(document.querySelectorAll('.filter-dropdown'));
+      function closeAll() {
+        dropdowns.forEach(d => {
+          d.classList.remove('open');
+          d.querySelector('.filter-dropdown-btn').setAttribute('aria-expanded', 'false');
+        });
       }
-    ];
+      dropdowns.forEach(dd => {
+        const btn = dd.querySelector('.filter-dropdown-btn');
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const wasOpen = dd.classList.contains('open');
+          closeAll();
+          if (!wasOpen) { dd.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+        });
+      });
+      document.addEventListener('click', closeAll);
+
+      /* class filter — multi-select */
+      const classOptions = Array.from(document.querySelectorAll('#filterMenu .filter-option'));
+      const classLabel = document.getElementById('filterBtnLabel');
+      const classFilters = ['everyday', 'sport', 'luxury'];
+      const names = { everyday: 'Ежедневен', sport: 'Спортен', luxury: 'Луксозен' };
+      const optByFilter = f => document.querySelector(`#filterMenu .filter-option[data-filter="${f}"]`);
+
+      function applyFilter() {
+        const active = classOptions.filter(o => o.classList.contains('active')).map(o => o.dataset.filter);
+        const showAll = active.includes('all') || active.length === 0;
+        cards.forEach(card => card.classList.toggle('hidden', !(showAll || active.includes(card.dataset.class))));
+        const T = window.KA ? window.KA.tr : (s => s);
+        classLabel.textContent = showAll
+          ? T('Всички')
+          : classFilters.filter(f => optByFilter(f).classList.contains('active')).map(f => T(names[f])).join(', ');
+      }
+
+      classOptions.forEach(opt => {
+        opt.addEventListener('click', e => {
+          e.stopPropagation();
+          if (opt.dataset.filter === 'all') {
+            classOptions.forEach(o => o.classList.add('active'));
+          } else if (optByFilter('all').classList.contains('active')) {
+            classOptions.forEach(o => o.classList.remove('active'));
+            opt.classList.add('active');
+          } else {
+            opt.classList.toggle('active');
+            if (!classFilters.some(f => optByFilter(f).classList.contains('active'))) {
+              classOptions.forEach(o => o.classList.add('active'));
+            } else {
+              optByFilter('all').classList.toggle('active', classFilters.every(f => optByFilter(f).classList.contains('active')));
+            }
+          }
+          applyFilter();
+        });
+      });
+
+      /* sort — single-select */
+      const sortDD = document.getElementById('sortDropdown');
+      const sortBtn = document.getElementById('sortBtn');
+      const sortOptions = Array.from(document.querySelectorAll('#sortMenu .filter-option'));
+      const sortLabel = document.getElementById('sortBtnLabel');
+
+      function applySort(mode) {
+        const sorted = [...cards];
+        if (mode === 'desc') sorted.sort((a, b) => b.dataset.price - a.dataset.price);
+        else if (mode === 'asc') sorted.sort((a, b) => a.dataset.price - b.dataset.price);
+        else if (mode === 'year-desc') sorted.sort((a, b) => b.dataset.year - a.dataset.year);
+        else if (mode === 'year-asc') sorted.sort((a, b) => a.dataset.year - b.dataset.year);
+        else sorted.sort((a, b) => origOrder.get(a) - origOrder.get(b));
+        sorted.forEach(c => grid.appendChild(c));
+      }
+
+      sortOptions.forEach(opt => {
+        opt.addEventListener('click', e => {
+          e.stopPropagation();
+          sortOptions.forEach(o => o.classList.remove('active'));
+          opt.classList.add('active');
+          sortLabel.textContent = opt.textContent;
+          applySort(opt.dataset.sort);
+          sortDD.classList.remove('open');
+          sortBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      document.addEventListener('ka:lang', () => {
+        applyFilter();
+        const act = document.querySelector('#sortMenu .filter-option.active');
+        if (act) sortLabel.textContent = act.textContent;
+      });
+
+      applyFilter();
+    })();
+  </script>
+    <script>
     function openService(i) {
-      const s = services[i];
-      document.getElementById('serviceModalIcon').innerHTML = s.icon;
-      document.getElementById('serviceModalTitle').textContent = s.title;
-      document.getElementById('serviceModalText').textContent = s.text;
+      const svc = (window.KA && window.KA.services) ? window.KA.services[i] : null;
+      if (!svc) return;
+      const lang = window.KA_LANG || 'bg';
+      const icons = ['import', 'buyback', 'kat', 'search'];
+      document.getElementById('serviceModalIcon').innerHTML = '<img src="images/services/' + icons[i] + '.png" alt="">';
+      document.getElementById('serviceModalTitle').textContent = svc.title[lang] || svc.title.bg;
+      document.getElementById('serviceModalText').textContent = svc.text[lang] || svc.text.bg;
       document.getElementById('serviceModal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
