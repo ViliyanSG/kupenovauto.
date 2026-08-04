@@ -104,6 +104,7 @@
     'Бензин + Газ': { ru: 'Бензин + газ', en: 'Petrol + LPG' },
     'Автоматична': { ru: 'Автоматическая', en: 'Automatic' },
     '8-степенна автоматична': { ru: '8-ступенчатая автоматическая', en: '8-speed automatic' },
+    '6-степенна автоматична': { ru: '6-ступенчатая автоматическая', en: '6-speed automatic' },
     'Автоматична, 7-степенна DCT': { ru: 'Автоматическая, 7-ступенчатая DCT', en: 'Automatic, 7-speed DCT' },
     'Ръчна': { ru: 'Механическая', en: 'Manual' },
     '4×4 (xDrive)': { ru: '4×4 (xDrive)', en: '4×4 (xDrive)' },
@@ -219,6 +220,8 @@
     if (MAP[s] && MAP[s][lang]) return MAP[s][lang];
     const m = s.match(/^([А-Яа-яA-Za-z]+)\s+(\d{4})$/);
     if (m && MONTHS[m[1]]) return MONTHS[m[1]][lang] + ' ' + m[2];
+    const d = s.match(/^До\s+([А-Яа-я]+)\s+(\d{4})$/);
+    if (d && MONTHS[d[1]]) return (lang === 'en' ? 'Until ' : 'До ') + MONTHS[d[1]][lang] + ' ' + d[2];
     let u;
     if ((u = s.match(/^(.+?)\s*сек\.?$/))) return lang === 'en' ? u[1].trim() + ' sec' : s;
     if ((u = s.match(/^([\d\s.]+)\s*к\.\s*с\.?$/))) return u[1].trim() + (lang === 'en' ? ' hp' : ' л.с.');
