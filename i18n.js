@@ -60,7 +60,7 @@
     'Задвижване': { ru: 'Привод', en: 'Drivetrain' },
     'Размер на гуми': { ru: 'Размер шин', en: 'Tire Size' },
     'Конски сили': { ru: 'Мощность (л.с.)', en: 'Horsepower (hp)' },
-    'Нютон метри': { ru: 'Крутящий момент (Н·м)', en: 'Torque (Nm)' },
+    'Нютон метри': { ru: 'Тяга мотора (Н·м)', en: 'Torque (Nm)' },
     'Турбо': { ru: 'Турбонаддув', en: 'Turbocharged' },
     'Произход': { ru: 'Происхождение', en: 'Origin' },
     'Ускорение 0–100 км/ч': { ru: 'Разгон 0–100 км/ч', en: '0–100 km/h Acceleration' },
@@ -128,7 +128,23 @@
     'Да, без челно': { ru: 'Да, кроме лобового', en: 'Yes, except windshield' },
     'Да, само заден': { ru: 'Да, только задний', en: 'Yes, rear only' },
     'Платен за 2026': { ru: 'Оплачен за 2026', en: 'Paid for 2026' },
-    'Платен 2026': { ru: 'Оплачен 2026', en: 'Paid 2026' }
+    'Платен 2026': { ru: 'Оплачен 2026', en: 'Paid 2026' },
+    /* merch */
+    '← Назад към начало': { ru: '← Назад на главную', en: '← Back to home' },
+    'Елегантен ключодържател': { ru: 'Элегантный брелок', en: 'Elegant keychain' },
+    'Ключодържател': { ru: 'Брелок', en: 'Keychain' },
+    'Характеристики': { ru: 'Характеристики', en: 'Specifications' },
+    'Материал': { ru: 'Материал', en: 'Material' },
+    'Неръждаема стомана': { ru: 'Нержавеющая сталь', en: 'Stainless steel' },
+    'Ринг': { ru: 'Кольцо', en: 'Ring' },
+    'За лесно поставяне': { ru: 'Для удобного крепления', en: 'For easy attachment' },
+    'Надпис': { ru: 'Гравировка', en: 'Engraving' },
+    'Лазерно гравиран': { ru: 'Лазерная гравировка', en: 'Laser-engraved' },
+    'Изработка': { ru: 'Исполнение', en: 'Build' },
+    'Здрава, стилна и дълготрайна': { ru: 'Прочное, стильное и долговечное', en: 'Durable, stylish and long-lasting' },
+    'Поръчай сега': { ru: 'Заказать', en: 'Order now' },
+    'Поръчай': { ru: 'Заказ', en: 'Order' },
+    'Свържете се с нас за поръчка на ключодържателя — ще се радваме да помогнем.': { ru: 'Свяжитесь с нами для заказа брелока — будем рады помочь.', en: 'Contact us to order the keychain — we’ll be happy to help.' }
   };
 
   const HTML_MAP = {
@@ -139,7 +155,7 @@
     },
     'contact-sub': {
       bg: 'За въпроси, огледи или допълнителна информация — не се колебайте да се свържете с нас.',
-      ru: 'По вопросам, осмотрам или дополнительной информации — не стесняйтесь связаться с нами.',
+      ru: 'Не стесняйтесь связаться с нами. По вопросам, осмотрам или дополнительной информации.',
       en: 'For questions, viewings, or additional information — don’t hesitate to contact us.'
     }
   };
@@ -209,7 +225,11 @@
     '.filter-btn-pre',
     '.filter-option',
     '.service-modal-title',
-    '.service-modal-text'
+    '.service-modal-text',
+    '.product-sub',
+    '.product-specs-title',
+    '.product-specs td',
+    '.product-cta'
   ].join(', ');
 
   function applyStatic(lang) {
