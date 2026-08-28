@@ -276,7 +276,7 @@
     const sw = document.getElementById('langSwitch');
     if (!sw) return;
     const btn = document.getElementById('langBtn');
-    const current = document.getElementById('langCurrentFlag');
+    const current = document.getElementById('langCurrentCode');
     const options = Array.from(sw.querySelectorAll('.lang-option'));
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -290,7 +290,7 @@
     function sync(lang) {
       const act = options.find(o => o.dataset.lang === lang) || options[0];
       options.forEach(o => o.classList.toggle('active', o === act));
-      if (current) current.innerHTML = act.querySelector('.lang-flag').innerHTML;
+      if (current) current.textContent = act.querySelector('.lang-code').textContent;
     }
     document.addEventListener('ka:lang', e => sync(e.detail));
     options.forEach(opt => {

@@ -62,18 +62,23 @@ nav.scrolled {
   padding: 0;
   cursor: pointer;
 }
-.lang-flag {
-  display: block;
-  width: 70px;
-  height: 42px;
+.lang-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  font-family: 'Jost', sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--gold);
   border: 1px solid var(--border);
-  overflow: hidden;
   transition: border-color 0.2s, opacity 0.2s;
   flex-shrink: 0;
 }
-.lang-flag svg { display: block; width: 100%; height: 100%; }
-.lang-btn:hover .lang-flag,
-.lang-switch.open .lang-flag { border-color: var(--gold); }
+.lang-btn:hover .lang-code,
+.lang-switch.open .lang-code { border-color: var(--gold); }
 .lang-caret {
   color: var(--grey);
   font-size: 11px;
@@ -98,9 +103,9 @@ nav.scrolled {
 }
 .lang-switch.open .lang-menu { display: flex; }
 .lang-option { background: none; border: none; padding: 0; cursor: pointer; line-height: 0; }
-.lang-option .lang-flag { opacity: 0.55; }
-.lang-option:hover .lang-flag,
-.lang-option.active .lang-flag { opacity: 1; border-color: var(--gold); }
+.lang-option .lang-code { opacity: 0.55; }
+.lang-option:hover .lang-code,
+.lang-option.active .lang-code { opacity: 1; border-color: var(--gold); }
 
 /* ── HERO ── */
 .hero {
