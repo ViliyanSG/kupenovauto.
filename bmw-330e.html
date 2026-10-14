@@ -144,7 +144,7 @@
     .specs-full-section { padding: 80px 60px 100px; }
     .specs-full-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 50px;
     }
     .specs-full-title {
@@ -217,7 +217,7 @@
   <!-- HERO -->
   <section class="car-hero">
     <div class="car-hero-img">
-      <img src="images/bmw_330e/7.jpg" alt="BMW 330e">
+      <img src="images/bmw_330e/5.jpg" alt="BMW 330e">
     </div>
     <div class="car-hero-info">
       <a href="index.html" class="back-link">← Назад към всички автомобили</a>
@@ -245,6 +245,8 @@
         <div class="carousel-slide" onclick="openLightbox(4)"><img src="images/bmw_330e/5.jpg" alt="BMW 330e"></div>
         <div class="carousel-slide" onclick="openLightbox(5)"><img src="images/bmw_330e/6.jpg" alt="BMW 330e"></div>
         <div class="carousel-slide" onclick="openLightbox(6)"><img src="images/bmw_330e/7.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(7)"><img src="images/bmw_330e/8.jpg" alt="BMW 330e"></div>
+        <div class="carousel-slide" onclick="openLightbox(8)"><img src="images/bmw_330e/9.jpg" alt="BMW 330e"></div>
       </div>
     </div>
     <div class="carousel-thumbs" id="carouselThumbs"></div>
@@ -302,16 +304,6 @@
           <tr><td>Спорт пакет</td><td class="val-yes">Да</td></tr>
         </table>
       </div>
-      <div>
-        <div class="specs-full-title">Административни</div>
-        <table class="specs-full-table">
-          <tr><td>Годишен технически преглед</td><td>—</td></tr>
-          <tr><td>Застраховка ГО</td><td>—</td></tr>
-          <tr><td>Каско</td><td>—</td></tr>
-          <tr><td>Винетка</td><td>—</td></tr>
-          <tr><td>Годишен данък</td><td>—</td></tr>
-        </table>
-      </div>
     </div>
   </section>
 
@@ -361,7 +353,7 @@
     const thumbsEl = document.getElementById('carouselThumbs');
     const wrap     = document.getElementById('carouselWrap');
     const slides   = track.querySelectorAll('.carousel-slide');
-    const imgs     = ['1','2','3','4','5','6','7'];
+    const imgs     = ['1','2','3','4','5','6','7','8','9'];
     let current = 0, autoTimer;
 
     imgs.forEach((name, i) => {
@@ -407,7 +399,7 @@
     });
   </script>
   <script>
-    const lbImgs = ['1','2','3','4','5','6','7'];
+    const lbImgs = ['1','2','3','4','5','6','7','8','9'];
     let lbIndex = 0;
 
     function openLightbox(i) { lbIndex = i; isVisible = false; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }

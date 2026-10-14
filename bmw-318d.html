@@ -144,7 +144,7 @@
     .specs-full-section { padding: 80px 60px 100px; }
     .specs-full-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 50px;
     }
     .specs-full-title {
@@ -217,7 +217,7 @@
   <!-- HERO -->
   <section class="car-hero">
     <div class="car-hero-img">
-      <img src="images/bmw_318d/1.jpg" alt="BMW 318d Touring">
+      <img src="images/bmw_318d/6.jpg" alt="BMW 318d Touring">
     </div>
     <div class="car-hero-info">
       <a href="index.html" class="back-link">← Назад към всички автомобили</a>
@@ -243,6 +243,9 @@
         <div class="carousel-slide" onclick="openLightbox(2)"><img src="images/bmw_318d/3.jpg" alt="BMW 318d Touring"></div>
         <div class="carousel-slide" onclick="openLightbox(3)"><img src="images/bmw_318d/4.jpg" alt="BMW 318d Touring"></div>
         <div class="carousel-slide" onclick="openLightbox(4)"><img src="images/bmw_318d/5.jpg" alt="BMW 318d Touring"></div>
+        <div class="carousel-slide" onclick="openLightbox(5)"><img src="images/bmw_318d/6.jpg" alt="BMW 318d Touring"></div>
+        <div class="carousel-slide" onclick="openLightbox(6)"><img src="images/bmw_318d/7.jpg" alt="BMW 318d Touring"></div>
+        <div class="carousel-slide" onclick="openLightbox(7)"><img src="images/bmw_318d/8.jpg" alt="BMW 318d Touring"></div>
       </div>
     </div>
     <div class="carousel-thumbs" id="carouselThumbs"></div>
@@ -300,16 +303,6 @@
           <tr><td>Спорт пакет</td><td class="val-no">Не</td></tr>
         </table>
       </div>
-      <div>
-        <div class="specs-full-title">Административни</div>
-        <table class="specs-full-table">
-          <tr><td>Годишен технически преглед</td><td>—</td></tr>
-          <tr><td>Застраховка ГО</td><td>—</td></tr>
-          <tr><td>Каско</td><td>—</td></tr>
-          <tr><td>Винетка</td><td>—</td></tr>
-          <tr><td>Годишен данък</td><td>—</td></tr>
-        </table>
-      </div>
     </div>
   </section>
 
@@ -359,7 +352,7 @@
     const thumbsEl = document.getElementById('carouselThumbs');
     const wrap     = document.getElementById('carouselWrap');
     const slides   = track.querySelectorAll('.carousel-slide');
-    const imgs     = ['1','2','3','4','5'];
+    const imgs     = ['1','2','3','4','5','6','7','8'];
     let current = 0, autoTimer;
 
     imgs.forEach((name, i) => {
@@ -405,7 +398,7 @@
     });
   </script>
   <script>
-    const lbImgs = ['1','2','3','4','5'];
+    const lbImgs = ['1','2','3','4','5','6','7','8'];
     let lbIndex = 0;
 
     function openLightbox(i) { lbIndex = i; isVisible = false; updateLightbox(); document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }

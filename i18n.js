@@ -34,7 +34,6 @@
     'Подредба:': { ru: 'Сортировка:', en: 'Sort:' },
     'Клас:': { ru: 'Класс:', en: 'Class:' },
     'Всички': { ru: 'Все', en: 'All' },
-    'Последно добавени': { ru: 'Последние добавленные', en: 'Recently added' },
     '↑ Възходяща сума': { ru: '↑ Возрастание цены', en: '↑ Price ascending' },
     '↓ Низходяща сума': { ru: '↓ Убывание цены', en: '↓ Price descending' },
     '↑ Възходяща година': { ru: '↑ Возрастание года', en: '↑ Year ascending' },
@@ -47,7 +46,6 @@
     /* spec section titles */
     'Общи характеристики': { ru: 'Общие характеристики', en: 'General Specifications' },
     'Екстри': { ru: 'Оснащение', en: 'Features' },
-    'Административни': { ru: 'Административные данные', en: 'Administrative Information' },
     /* spec labels — general */
     'Модел': { ru: 'Модель', en: 'Model' },
     'Година на производство': { ru: 'Год выпуска', en: 'Year of Manufacture' },
